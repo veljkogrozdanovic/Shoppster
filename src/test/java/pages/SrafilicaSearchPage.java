@@ -34,6 +34,7 @@ public class SrafilicaSearchPage extends BaseHelper
         priceRange.click();
     }
 
+
     public void ChooseSraflica() throws InterruptedException
     {
         SelectBosch();

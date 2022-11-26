@@ -22,6 +22,9 @@ public class ShoppsterHomePage extends BaseHelper
     @FindBy(className = "btn-primary")
     WebElement cookiesButton;
 
+    @FindBy(linkText = "Mali kućni aparati")
+    WebElement mkaButton;
+
     public ShoppsterHomePage(WebDriver driver)
     {
         this.driver = driver;
@@ -46,10 +49,21 @@ public class ShoppsterHomePage extends BaseHelper
     {
         searchButton.click();
     }
-    public void choosItems(String items) throws InterruptedException {
+
+    private void selectMaliKucniAparati()
+    {
+        mkaButton.click();
+    }
+    public void chooseItems(String items) throws InterruptedException {
         navigateToShopsterHomePage();
         acceptCookies();
         selectItems(items);
         clickSearchButton();
     }
+    public  void chooseMaliKucniAparati() throws InterruptedException {
+        navigateToShopsterHomePage();
+        acceptCookies();
+        selectMaliKucniAparati();
+    }
+
 }

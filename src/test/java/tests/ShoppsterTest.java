@@ -5,22 +5,25 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MaliKucniAparatiPage;
 import pages.ShoppsterHomePage;
 import pages.SrafilicaSearchPage;
+import pages.UsisivaciPage;
 
 import java.util.List;
 
 public class ShoppsterTest extends BaseTest
 {
     @Test
-    public void shopsterTest() throws InterruptedException
+    public void srafilicaTest() throws InterruptedException
     {
         String searchTerm = "Srafilica";
         String brand = "Bosch";
+
         ShoppsterHomePage shopsterHomePage = new ShoppsterHomePage(driver);
         SrafilicaSearchPage srafilicaSearchPage = new SrafilicaSearchPage(driver);
 
-        shopsterHomePage.choosItems(searchTerm);
+        shopsterHomePage.chooseItems(searchTerm);
         Thread.sleep(1500);
         srafilicaSearchPage.ChooseSraflica();
         Thread.sleep(1500);
@@ -41,4 +44,21 @@ public class ShoppsterTest extends BaseTest
 
         Thread.sleep(1000);
     }
+
+    @Test
+    public void usisivaciSaKesomTest() throws InterruptedException
+    {
+        String pageTitle = "Usisivači s kesom";
+        ShoppsterHomePage shoppsterHomePage = new ShoppsterHomePage(driver);
+        MaliKucniAparatiPage maliKucniAparatiPage = new MaliKucniAparatiPage(driver);
+        UsisivaciPage usisivaciPage = new UsisivaciPage(driver);
+
+        shoppsterHomePage.chooseMaliKucniAparati();
+        maliKucniAparatiPage.chooseUsisivaci();
+        usisivaciPage.chooseUsisivaciSaKesom();
+
+        wdWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("CategoryPageHeadingSlot")));
+        WebElement results = driver.findElement(By.className("CategoryPageHeadingSlot"));
+        Assert.assertTrue("Page title doesn't match",results.getText().contains(pageTitle));
+     }
 }
